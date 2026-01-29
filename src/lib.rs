@@ -1,5 +1,7 @@
-use matchit::InsertError;
 use pyo3::prelude::*;
+use pyo3::types::PyDict;
+use pyo3::Python as py;
+use pyo3::exceptions::PyLookupError;
 
 
 #[pyclass(name = "Router")]
@@ -20,8 +22,18 @@ impl Router {
         self.inner.insert(route, value).expect("TODO: panic message");
     }
 
-    pub fn at(&mut self, path: &str) -> &String {
-        (&mut self.inner).at(path).unwrap().value
+    pub fn at<'py>(&mut self, py: pyo3::Python<'py>, path: &str) -> PyResult<Bound<'py, PyDict>> {
+        let matched = (&mut self.inner).at(path);
+        if matched.is_ok() {
+            let d = PyDict::new(py);
+            for (k, v) in matched.unwrap().params.iter()  {
+                d.set_item(k, v)?;
+            }
+            Ok(d)
+            // Ok(PyDict::newmatched.unwrap().params)
+        } else {
+            Err(PyErr::new::<PyLookupError, _>("No route found"))
+        }
     }
 }
 

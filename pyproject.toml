@@ -21,7 +21,6 @@ dev = [
 [tool.uv.workspace]
 members = [
     ".",
-    ".",
 ]
 
 [tool.uv.sources]
