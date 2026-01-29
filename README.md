@@ -11,7 +11,7 @@ pip install python-matchit
 ```python
 from matchit import Router
 router = Router()
-router.insert("/users/:id", "test_id")
+router.insert("/users/{id}", "test_id")
 
 res = router.at("/users/123")
 
