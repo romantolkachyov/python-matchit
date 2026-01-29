@@ -1,5 +1,5 @@
-use pyo3::exceptions::PyLookupError;
 use pyo3::Python;
+use pyo3::exceptions::PyLookupError;
 use pyo3::prelude::*;
 use std::collections::HashMap;
 
@@ -13,7 +13,7 @@ struct MatchResult {
     #[pyo3(get)]
     value: Py<PyAny>,
     #[pyo3(get)]
-    params: std::collections::HashMap<String, String>,
+    params: HashMap<String, String>,
 }
 
 #[pymethods]
