@@ -4,8 +4,9 @@ r = Router()
 r.insert("/test/{id}", "test_id")
 
 res = r.at("/test/1")
-print(res)
-assert res == {"id": "1"}
+
+assert res.route == "test_id"
+assert res.params == {"id": "1"}
 
 try:
     assert r.at("/noway")
