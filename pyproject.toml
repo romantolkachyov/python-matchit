@@ -12,7 +12,17 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
+maintainers = [
+    {name = "Roman Tolkachyov", email = "roman@tolkachyov.name"}
+]
+license = "MIT"
 dynamic = ["version"]
+keywords = ["routing", "web", "url", "rust", "matchit", "bindings"]
+
+[project.urls]
+github = "https://github.com/romantolkachyov/python-matchit"
+releasenotes = "https://github.com/romantolkachyov/python-matchit/releases"
+issues = "https://github.com/romantolkachyov/python-matchit/issues"
 
 [dependency-groups]
 dev = [
