@@ -1,16 +1,17 @@
 use pyo3::exceptions::PyLookupError;
+use pyo3::Python;
 use pyo3::prelude::*;
 use std::collections::HashMap;
 
 #[pyclass(name = "Router")]
 struct Router {
-    inner: matchit::Router<String>,
+    inner: matchit::Router<Py<PyAny>>,
 }
 
 #[pyclass(name = "MatchResult")]
 struct MatchResult {
     #[pyo3(get)]
-    route_id: String,
+    route: Py<PyAny>,
     #[pyo3(get)]
     params: std::collections::HashMap<String, String>,
 }
@@ -24,13 +25,13 @@ impl Router {
         }
     }
 
-    pub fn insert(&mut self, route: String, value: String) {
+    pub fn insert(&mut self, route: String, value: Py<PyAny>) {
         self.inner
             .insert(route, value)
             .expect("Panic! Failed to insert route");
     }
 
-    pub fn at(&self, path: &str) -> PyResult<MatchResult> {
+    pub fn at(&self, _py: Python, path: &str) -> PyResult<MatchResult> {
         let matched = (&self.inner).at(path);
         if matched.is_ok() {
             let unwrapped = matched.unwrap();
@@ -39,7 +40,7 @@ impl Router {
                 d.insert(k.to_string(), v.to_string());
             }
             Ok(MatchResult {
-                route_id: unwrapped.value.to_string(),
+                route: unwrapped.value.clone_ref(_py),
                 params: d,
             })
         } else {
