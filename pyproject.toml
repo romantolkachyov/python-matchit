@@ -4,6 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "python-matchit"
+description = "Bindings for matchit rust library."
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Rust",
