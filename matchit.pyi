@@ -5,7 +5,7 @@ T = TypeVar("T")
 
 class MatchResult(Generic[T]):
     """Router match result."""
-    route: T
+    value: T
     params: Mapping[str, str]
 
 class Router(Generic[T]):
@@ -16,7 +16,7 @@ class Router(Generic[T]):
     It is not safe to insert routes after application is started up.
     """
 
-    def insert(self, url_pattern: str, route: T) -> None:
+    def insert(self, url_pattern: str, value: T) -> None:
         """Add route to the router.
         """
         ...

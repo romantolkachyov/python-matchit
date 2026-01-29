@@ -15,7 +15,7 @@ router.insert("/users/{id}", "test_id")
 
 res = router.at("/users/123")
 
-assert res.route == "test_id"
+assert res.value == "test_id"
 assert res.params == {"id": "123"}
 
 try:

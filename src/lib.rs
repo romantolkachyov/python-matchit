@@ -11,7 +11,7 @@ struct Router {
 #[pyclass(name = "MatchResult")]
 struct MatchResult {
     #[pyo3(get)]
-    route: Py<PyAny>,
+    value: Py<PyAny>,
     #[pyo3(get)]
     params: std::collections::HashMap<String, String>,
 }
@@ -40,7 +40,7 @@ impl Router {
                 d.insert(k.to_string(), v.to_string());
             }
             Ok(MatchResult {
-                route: unwrapped.value.clone_ref(_py),
+                value: unwrapped.value.clone_ref(_py),
                 params: d,
             })
         } else {
