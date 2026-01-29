@@ -30,8 +30,8 @@ impl Router {
             .expect("TODO: panic message");
     }
 
-    pub fn at<'py>(&mut self, path: &str) -> PyResult<MatchResult> {
-        let matched = (&mut self.inner).at(path);
+    pub fn at(&self, path: &str) -> PyResult<MatchResult> {
+        let matched = (&self.inner).at(path);
         if matched.is_ok() {
             let unwrapped = matched.unwrap();
             let mut d = HashMap::new();
