@@ -10,7 +10,7 @@ struct Router {
 #[pyclass(name = "MatchResult")]
 struct MatchResult {
     #[pyo3(get)]
-    route: String,
+    route_id: String,
     #[pyo3(get)]
     params: std::collections::HashMap<String, String>,
 }
@@ -24,10 +24,10 @@ impl Router {
         }
     }
 
-    pub fn insert<'py>(&mut self, route: String, value: String) {
+    pub fn insert(&mut self, route: String, value: String) {
         self.inner
             .insert(route, value)
-            .expect("TODO: panic message");
+            .expect("Panic! Failed to insert route");
     }
 
     pub fn at(&self, path: &str) -> PyResult<MatchResult> {
@@ -39,7 +39,7 @@ impl Router {
                 d.insert(k.to_string(), v.to_string());
             }
             Ok(MatchResult {
-                route: unwrapped.value.to_string(),
+                route_id: unwrapped.value.to_string(),
                 params: d,
             })
         } else {
