@@ -128,7 +128,7 @@ dependencies = [
 
 [[package]]
 name = "python-matchit"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "matchit",
  "pyo3",
