@@ -1,5 +1,11 @@
 **python-matchit** package contains binding for [matchit](https://docs.rs/matchit/latest/matchit/) rust library.
 
+# Installation
+
+```shell
+pip install python-matchit
+```
+
 # Usage
 
 ```python
